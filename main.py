@@ -70,7 +70,7 @@ async def receivetext(ctx, *,message:str):
     root.geometry("400x240")
     def getTextInput():
         resulttext=textExample.get("1.0","end")
-        receivetext2(resulttext)
+        recievetext2(resulttext)
     textExample=tk.Text(root, height=10)
     textExample.pack()
     btnRead=tk.Button(root, height=1, width=10, text="Say something to your hacker", 
