@@ -22,4 +22,5 @@ rev!recievetext: make the client say something to you
 rev!webcamsnap: gets a photo from the client webcam
 #
 rev!shellcommand command: execute a command via the client shell 
-
+#
+ecc....
