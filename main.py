@@ -6,7 +6,7 @@ import subprocess
 import time
 from cv2 import cv2
 
-token = "NzQ3MjIyNzQ5Mzk4OTU4MzEy.X0Lvag.Ownq-y9wiqujOe9fmkAskdM5nhc" #bot token
+token = "" #bot token
 prefix = "rev!"
 bot = discord.Client()
 message = discord.Message
